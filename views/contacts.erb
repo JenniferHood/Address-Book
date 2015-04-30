@@ -1,0 +1,12 @@
+<h1 class="text-center">All Contacts</h1>
+
+<% if @all_contacts.empty? %>
+  <p class="text-danger">No contacts exist. <a href='contacts/new'>Click here to add a contact</a></p>
+<% else %>
+  <ul>
+    <% @all_contacts.each do |contact| %>
+      <li><a href="/contacts/<%= contact.id() %>"><%= contact.first_name() %> <%= contact.last_name() %></a></li>
+    <% end %>
+  </ul>
+<% end %>
+  <a href='/'>Return Home</a>
