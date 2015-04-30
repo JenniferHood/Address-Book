@@ -6,6 +6,8 @@ also_reload('lib/**/*.rb')
 #set(:show_exceptions, false)
 
 get('/') do
+  @all_contacts = Contact.all()
+
   erb(:index)
 end
 
@@ -25,9 +27,7 @@ post('/contacts') do
 
   contact = Contact.new({:first_name => first_name, :last_name => last_name})
   contact.save()
-  redirect to('/contacts')
-
-  #erb(:contacts)
+  redirect to('/')
 end
 
 get('/reset') do
@@ -39,4 +39,24 @@ get('/contacts/:id') do
   contact_id = params.fetch('id').to_i
   @contact = Contact.find(contact_id)
   erb(:contact)
+end
+
+get('/contacts/:id/phones/new') do
+  contact_id = params.fetch('id').to_i
+  @contact = Contact.find(contact_id)
+  erb(:phone_form)
+end
+
+post('/contacts/:id/phones') do
+  contact_id      = params.fetch('id').to_i
+  phone_number    = params.fetch('phone_number').to_i
+  phone_area_code = params.fetch('phone_area_code')
+  phone_type      = params.fetch('phone_type')
+
+  contact = Contact.find(contact_id)
+  contact.add_phone({:phone_number => phone_number,
+                     :area_code    => phone_area_code,
+                     :type         => phone_type})
+
+  redirect to('/contacts')
 end

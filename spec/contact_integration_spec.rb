@@ -11,14 +11,12 @@ describe('the address book app', :type => :feature) do
 
   describe('/ path') do
     it('loads the home page') do
-      click_link('Return Home')
-      expect(page).to(have_content('Your Address Book!'))
+      expect(page).to(have_content('Address Book'))
     end
   end
 
   describe('/contacts path') do
     it('shows message when no contacts exist') do
-      click_link('See your Contacts List')
       expect(page).to(have_content('No contacts exist'))
     end
 
@@ -40,6 +38,25 @@ describe('the address book app', :type => :feature) do
       click_button('Submit!')
       click_link('Bugs Bunny')
       expect(page).to(have_content('Bugs Bunny Contact Info'))
+    end
+  end
+
+  describe('/contacts/:id/phones') do
+    it('it shows the number details of the contact') do
+      click_link('Add a new contact')
+      fill_in('first_name', :with => 'Bugs')
+      fill_in('last_name', :with => 'Bunny')
+      click_button('Submit!')
+      click_link('Bugs Bunny')
+      click_link('Please add phone number for Bugs')
+      fill_in('phone_area_code', :with => 333)
+      fill_in('phone_number', :with => 4444444444)
+      select('Work', :from => 'phone_type')
+      click_button('Submit!')
+      click_link('Bugs Bunny')
+      expect(page).to(have_content('Area code: 333'))
+      expect(page).to(have_content('Phone number: 4444444444'))
+      expect(page).to(have_content('Phone type: Work'))
     end
   end
 end

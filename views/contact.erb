@@ -1,1 +1,16 @@
-<h1><%= @contact.first_name %> <%= @contact.last_name %> Contact Info</h1>
+<h4><%= @contact.first_name %> <%= @contact.last_name %> Contact Info</h4>
+
+
+<% @contact.phone_numbers.each do |phone| %>
+  <ul>
+    <li>Area code: <%= phone.area_code() %></li>
+    <li>Phone type: <%= phone.type() %></li>
+    <li>Phone number: <%= phone.phone_number() %></li>
+  </ul>
+<% end %>
+
+<li>
+  <a href="/contacts/<%= @contact.id() %>/phones/new">
+    Please add phone number for <%= @contact.first_name() %>
+  </a>
+</li>

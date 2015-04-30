@@ -1,11 +1,16 @@
-<h1 class='text-center'> Your Address Book! </h1>
+<h4>Your contacts:</h4>
 
-<p>
-  <a href='/contacts'>See your Contacts List</a>
-</p>
-
-<p>
-  <a href='/contacts/new'>Add a new contact</a>
-</p>
-
-<a href='/'>Return Home</a>
+<div class="contacts-container">
+  <% if @all_contacts.empty? %>
+    <p class="text-danger">No contacts exist. <a href='contacts/new'>Click here to add a contact</a></p>
+  <% else %>
+    <ul>
+      <% @all_contacts.each do |contact| %>
+        <li><a href="/contacts/<%= contact.id() %>"><%= contact.first_name() %> <%= contact.last_name() %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+<br>
+<br>
+<a href='/contacts/new'>Add a new contact</a>
