@@ -2,11 +2,12 @@ class Contact
 
   @@contacts = []
 
-  attr_reader(:first_name,:last_name, :id, :phone_numbers)
+  attr_reader(:first_name,:last_name, :id, :phone_numbers, :birthdate)
 
   define_method(:initialize) do |attributes|
     @first_name = attributes.fetch(:first_name)
     @last_name  = attributes.fetch(:last_name)
+    @birthdate   = attributes.fetch(:birthdate)
     @id         = @@contacts.size.+(1)
     @phone_numbers = []
   end
@@ -19,7 +20,6 @@ class Contact
     area_code = stuff.fetch(:area_code)
     type = stuff.fetch(:type)
     phone_number = stuff.fetch(:phone_number)
-
     phone = Phone.new({:area_code => area_code, :type => type, :phone_number => phone_number})
     @phone_numbers.push(phone)
   end

@@ -24,8 +24,8 @@ end
 post('/contacts') do
   first_name = params.fetch('first_name')
   last_name  = params.fetch('last_name')
-
-  contact = Contact.new({:first_name => first_name, :last_name => last_name})
+  birthdate  = params.fetch('birthdate')
+  contact = Contact.new({:first_name => first_name, :last_name => last_name, :birthdate => birthdate})
   contact.save()
   redirect to('/')
 end
