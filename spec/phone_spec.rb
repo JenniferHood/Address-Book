@@ -24,4 +24,12 @@ describe('Phone') do
       expect(@phone.type).to(eq('Home'))
     end
   end
+
+  describe("#==") do
+    it("is the same phone number if it has the same numbers") do
+      phone1 = Phone.new({:phone_number => 5551112222, :area_code => 805, :type => 'Home'})
+      phone2 = Phone.new({:phone_number => 5551112222, :area_code => 805, :type => 'Home'})
+      expect(phone1).to(eq(phone2))
+    end
+  end
 end

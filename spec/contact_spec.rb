@@ -1,5 +1,5 @@
-require('rspec')
-require('contact')
+require('spec_helper')
+
 
 describe('Contact') do
   before do
@@ -25,6 +25,14 @@ describe('Contact') do
       contact = Contact.new({:first_name => "Jennifer", :last_name => "Minetree"})
       contact.save()
       expect(Contact.find(contact.id)).to(eq(contact))
+    end
+  end
+
+  describe("#==") do
+    it("is the same contact if it has the same name") do
+      contact1 = Contact.new({:first_name => "Jennifer", :last_name => "Minetree"})
+      contact2 = Contact.new({:first_name => "Jennifer", :last_name => "Minetree"})
+      expect(contact1).to(eq(contact2))
     end
   end
 end

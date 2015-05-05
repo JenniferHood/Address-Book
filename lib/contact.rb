@@ -43,4 +43,8 @@ class Contact
 
     contact_match
   end
+
+  define_method(:==) do |another_contact|
+    self.first_name().==(another_contact.first_name()).&(self.last_name().==(another_contact.last_name()))
+  end
 end
